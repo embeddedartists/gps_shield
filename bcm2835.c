@@ -683,7 +683,14 @@ int bcm2835_close()
 	    free(clkMem);
 	    clkMem = NULL;
 	}
-
+	if (pads != MAP_FAILED) {
+	    munmap((void*)pads, BCM2835_BLOCK_SIZE);
+	    pads = MAP_FAILED;
+	}
+	if (padsMem) {
+	    free(padsMem);
+	    padsMem = NULL;
+	}
 	if (spi0 != MAP_FAILED)
 	{
 	    munmap((void*)spi0, BCM2835_BLOCK_SIZE);

@@ -157,7 +157,10 @@
 
 // Physical addresses for various peripheral regiser sets
 /// Base Physical Address of the BCM 2835 peripheral registers
-#define BCM2835_PERI_BASE               0x20000000
+//#define BCM2835_PERI_BASE               0x3f000000//0x20000000
+#ifndef BCM2835_PERI_BASE
+   #error BCM2835_PERI_BASE must be either 0x20000000 (Rpi1) or 0x3f000000 (Rpi2)
+#endif
 /// Base Physical Address of the Pads registers
 #define BCM2835_GPIO_PADS               (BCM2835_PERI_BASE + 0x100000)
 /// Base Physical Address of the Clock/timer registers

@@ -22,9 +22,10 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/mman.h>
-#include <bcm2835.h>  //http://www.open.com.au/mikem/bcm2835/
+#include "bcm2835.h"  //http://www.open.com.au/mikem/bcm2835/
+#include "bcm2835_i2cbb.h"
 
-
+#ifndef BCM2835_I2CBB_H
 struct bcm2835_i2cbb {
     uint8_t address; // 7 bit address
     uint8_t sda; // pin used for sda coresponds to gpio
@@ -32,6 +33,7 @@ struct bcm2835_i2cbb {
     uint32_t clock_delay; // proporional to bus speed
     uint32_t timeout; //
 };
+#endif // BCM2835_I2CBB_H
 
 // *****************************************************************************
 // open bus, sets structure and initialises GPIO
@@ -339,6 +341,8 @@ void bcm8235_i2cbb_discover(struct bcm2835_i2cbb *bb, uint8_t first, uint8_t las
 	}
 }
 
+#ifndef BCM2835_I2CBB_H
+
 // *****************************************************************************
 // example for reading device ID
 // address is the 7 bit address
@@ -401,4 +405,4 @@ int main(int argc, char **argv)
 
     exit(0);
 }
-
+#endif // BCM2835_I2CBB_H
